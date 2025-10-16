@@ -18,6 +18,6 @@ Route::get('/contacts/{contact}/edit', function (ContactDetails $contact) {
 
 
 Route::get('/', function () {
-    return view('welcome'); 
+    return redirect()->route('book.table');
 });
 
