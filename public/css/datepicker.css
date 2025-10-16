@@ -1,0 +1,308 @@
+/*
+ * Classy White Restaurant Reservation Datepicker Skin
+ * Designed for jQuery UI Datepicker
+ *
+ * Make sure to load a jQuery UI theme CSS BEFORE this file.
+ * Example: <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+ *
+ * And ensure these Google Fonts are loaded in your HTML <head>:
+ * <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+ */
+
+/* --- General Datepicker Container Styling --- */
+#ui-datepicker-div.ui-datepicker {
+    /* Main background and border for the entire datepicker popup */
+    border: 1px solid #ddd; /* Light gray subtle border */
+    background-color: #ffffff; /* Pure white background */
+    font-family: 'Open Sans', sans-serif; /* Clean, modern sans-serif for general text */
+    color: #333; /* Dark text color for contrast */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Soft, subtle shadow for depth */
+    border-radius: 8px; /* More pronounced rounded corners */
+    padding: 15px; /* Internal padding for breathing room */
+    z-index: 9999 !important; /* Ensure it appears above other elements if needed */
+}
+
+/* --- Header Section (Month/Year & Navigation) --- */
+.ui-datepicker .ui-datepicker-header {
+    color: #333; /* Dark text for header */
+    padding: 12px 0;
+    border-bottom: 1px solid #eee; /* Light separator line */
+    border-radius: 6px 6px 0 0; /* Match container rounding */
+    margin-bottom: 10px; /* Space between header and calendar grid */
+    position: relative; /* For absolute positioning of arrows */
+    background: transparent;
+    border: none;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    font-family: 'Playfair Display', serif; /* Elegant serif font for month/year */
+    font-size: 1.4em; /* Larger month/year */
+    color: #333; /* Dark color for month/year */
+    text-align: center;
+    margin: 0;
+}
+
+/* --- Navigation Arrows (Prev/Next) --- */
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* Size of the clickable area */
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    background-color: transparent; /* No background */
+    border: none;
+    color: #666; /* Medium gray arrows */
+    font-size: 2em; /* Larger, more prominent arrows */
+    font-weight: bold;
+    opacity: 0.7; /* Slightly faded normally */
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    border-radius: 50%; /* Make clickable area circular */
+    text-decoration: none;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+    left: 10px;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    right: 10px;
+}
+
+.ui-datepicker .ui-datepicker-prev:hover,
+.ui-datepicker .ui-datepicker-next:hover {
+    opacity: 1; /* Fully opaque on hover */
+    background-color: rgba(0, 0, 0, 0.05); /* Subtle highlight on hover */
+}
+
+/* Hide default jQuery UI arrow spans */
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+    display: none;
+}
+
+/* Custom arrow characters (Unicode) */
+.ui-datepicker .ui-datepicker-prev::before { content: '\2039'; } /* Left single angle quote */
+.ui-datepicker .ui-datepicker-next::before { content: '\203A'; } /* Right single angle quote */
+
+/* --- Month/Year Dropdowns (if changeMonth/Year is true) --- */
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+    background-color: #ffffff; /* White background */
+    color: #333; /* Dark text */
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    appearance: none; /* Remove default select arrow for custom styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Custom SVG arrow for dropdown (dark) */
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px;
+    padding-right: 25px; /* Make space for custom arrow */
+}
+
+.ui-datepicker select.ui-datepicker-month:focus,
+.ui-datepicker select.ui-datepicker-year:focus {
+    outline: none;
+    border-color: #a0a0a0; /* Slightly darker gray border on focus */
+}
+
+/* --- Day Names (Sun, Mon, Tue...) --- */
+.ui-datepicker-header a{
+    text-decoration: none;
+}
+.ui-datepicker th {
+    color: #777; /* Medium gray for day names */
+    font-weight: 600; /* Slightly bolder */
+    padding: 10px 5px;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.8px;
+    text-align: center;
+    border: none; /* Remove cell borders for day names */
+}
+
+/* --- Calendar Days Grid --- */
+.ui-datepicker td {
+    padding: 0; /* Remove default cell padding */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    border: none;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center;
+    align-items: center;
+    width: 38px; /* Fixed width for date circles */
+    height: 38px; /* Fixed height for date circles */
+    text-align: center;
+    text-decoration: none;
+    color: #333; /* Dark color for day numbers */
+    background-color: transparent;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    margin: 2px auto; /* Center the circle within the cell */
+    border: none;
+
+}
+
+/* Default day state */
+.ui-datepicker td .ui-state-default {
+    color: #333;
+    font-weight: normal;
+    border: none;
+    background: transparent;
+}
+
+/* Hover state for selectable days */
+.ui-datepicker td .ui-state-hover {
+    background-color: rgb(113 39 62 / 74%); /* Light gray background on hover */
+    color: #fefefe; /* A subtle, elegant blue for hover text */
+    cursor: pointer;
+}
+
+/* Today's date */
+.ui-datepicker .ui-state-highlight.ui-state-default {
+    background-color: rgb(113, 39, 62); /* Very light blue for today */
+    color: #fefefe; /* Darker blue for today's text */
+    font-weight: bold;
+    border: 1px solid rgb(113, 39, 62); /* Light blue border for today */
+}
+
+/* Selected date */
+.ui-datepicker .ui-state-active {
+    background-color: #007bff; /* Primary blue for the selected date */
+    color: #fff; /* White text on selected date */
+    font-weight: bold;
+    border: 1px solid #0056b3; /* Darker blue border */
+}
+
+/* Days from other months (faded) */
+.ui-datepicker .ui-datepicker-other-month .ui-state-default {
+    color: #aaa; /* Lighter gray for days of prev/next month */
+    opacity: 0.7;
+}
+
+/* Disabled dates (e.g., unavailable slots) */
+.ui-datepicker .ui-state-disabled {
+    color: #ccc; /* Very light gray text */
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+.ui-datepicker .ui-state-disabled.ui-state-hover {
+    background-color: transparent;
+    color: #ccc; /* Ensure no hover effect on disabled dates */
+}
+
+/* --- Button Pane (if showButtonPanel: true) --- */
+.ui-datepicker .ui-datepicker-buttonpane {
+    background-color: #f8f8f8; /* Match header background */
+    padding: 12px;
+    border-top: 1px solid #eee; /* Separator line */
+    border-radius: 0 0 6px 6px; /* Match container rounding */
+    text-align: right; /* Align buttons to the right */
+    margin-top: 10px;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button {
+    background-color: #e0e0e0; /* Light gray button background */
+    color: #333; /* Dark text */
+    border: 1px solid #ccc;
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    margin-left: 10px; /* Space between buttons */
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button:hover {
+    background-color: #d0d0d0; /* Slightly darker on hover */
+    border-color: #bbb;
+}
+
+/* Specific styling for 'Today' button if it exists */
+.ui-datepicker .ui-datepicker-buttonpane .ui-datepicker-current {
+    background-color: #007bff; /* Primary blue for Today button */
+    color: #fff;
+    border-color: #0056b3;
+}
+.ui-datepicker .ui-datepicker-buttonpane .ui-datepicker-current:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* --- Input Field Styling (to match the datepicker) --- */
+/* This assumes your input field has an ID like 'reservationDate' */
+input[type="text"]#reservationDate {
+    background-color: #ffffff; /* White background for input */
+    color: #333; /* Dark text */
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]#reservationDate:focus {
+    border-color: #007bff; /* Primary blue highlight on focus */
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Subtle blue glow */
+    outline: none;
+}
+
+/* --- Input Group Icon Styling (if using Bootstrap 5 input groups) --- */
+.input-group.date .input-group-text {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    color: #666; /* Medium gray for icon */
+    border-left: none; /* Remove left border to blend with input */
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.input-group.date .input-group-text:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+    color: #333;
+}
+
+
+#ui-datepicker-div:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -7px;
+    left: 6px;
+}
+#ui-datepicker-div:after {
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
+    position: absolute;
+    top: -6px;
+    left: 7px;
+}
+
+#reservationDate{
+    cursor: pointer;
+}
